@@ -22,8 +22,8 @@ import kotlin.math.floor
 class GameViewModel(val wordsRepository: WordsRepository) : ViewModel() {
 
     //inicialización de un flujo de estado mutable de los elementos de la interfaz
-    private val _gameUIState : MutableStateFlow<GameUiState> = MutableStateFlow(GameUiState())
-    val gameUiState : StateFlow<GameUiState>
+    private val _gameUIState: MutableStateFlow<GameUiState> = MutableStateFlow(GameUiState())
+    val gameUiState: StateFlow<GameUiState>
         get() = _gameUIState.asStateFlow()
 
     init {
@@ -33,12 +33,13 @@ class GameViewModel(val wordsRepository: WordsRepository) : ViewModel() {
             currentSate.copy(
                 word = wordsRepository.wordList.get(0),
                 score = 0,
-                wordList = wordsRepository.wordList.subList(1,wordsRepository.wordList.size))
+                wordList = wordsRepository.wordList.subList(1, wordsRepository.wordList.size)
+            )
         }
 
         //lanzo corrutina con un temporizador
         viewModelScope.launch {
-            MyTimer(10f,0.5f,500).timer.filter {
+            MyTimer(10f, 0.5f, 500).timer.filter {
                 it - floor(it) == 0f
             }.collect {
                 _gameUIState.update { currentState ->
@@ -70,25 +71,31 @@ class GameViewModel(val wordsRepository: WordsRepository) : ViewModel() {
     }
 
     //Función que toma una nueva palabra e incrementa o decrementa la puntuación.
-    fun nextWord(acierto : Boolean) {
+    fun nextWord(acierto: Boolean) {
         val inc = if (acierto) 1 else -1
-        if(gameUiState.value.wordList.isNotEmpty()) {
+        if (gameUiState.value.wordList.isNotEmpty()) {
             _gameUIState.update { currentState ->
                 currentState.copy(
                     word = currentState.wordList.get(0),
-                    score = currentState.score+inc,
-                    wordList = currentState.wordList.subList(1,currentState.wordList.size)
+                    score = currentState.score + inc,
+                    wordList = currentState.wordList.subList(1, currentState.wordList.size)
                 )
             }
         } else {
             _gameUIState.update { currenState ->
                 currenState.copy(
                     word = "",
-                    score = currenState.score+inc,
+                    score = currenState.score + inc,
                     wordList = emptyList()
                 )
             }
         }
+        if (gameUiState.value.score == 10 && inc == 1)
+            _gameUIState.update { currenState ->
+                currenState.copy(
+                    message = "Good score!"
+                )
+            }
     }
 
 //    fun onSkip() {

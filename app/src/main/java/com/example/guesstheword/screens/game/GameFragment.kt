@@ -90,6 +90,9 @@ class GameFragment : Fragment() {
                         binding.skipButton.isEnabled = false
                         binding.wordText.text = getString(R.string.no_word)
                     }
+                    gameState.message?.let{
+                        Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

@@ -92,6 +92,7 @@ class GameFragment : Fragment() {
                     }
                     gameState.message?.let{
                         Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+                        gameVM.messageShown()
                     }
                 }
             }

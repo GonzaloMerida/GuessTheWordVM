@@ -98,6 +98,14 @@ class GameViewModel(val wordsRepository: WordsRepository) : ViewModel() {
             }
     }
 
+    fun messageShown() {
+        _gameUIState.update { currenState ->
+            currenState.copy(
+                message = null
+            )
+        }
+    }
+
 //    fun onSkip() {
 //        _score--
 //        nextWord()

@@ -23,6 +23,9 @@
             android:name="final_score"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_scoreFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"

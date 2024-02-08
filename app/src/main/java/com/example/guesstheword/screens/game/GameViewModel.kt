@@ -26,6 +26,11 @@ class GameViewModel(val wordsRepository: WordsRepository) : ViewModel() {
     val gameUiState: StateFlow<GameUiState>
         get() = _gameUIState.asStateFlow()
 
+
+    private lateinit var _myTimer : Flow<Float>
+    val myTimer get() = _myTimer
+
+
     init {
         Log.i("GameViewModel", "GameViewModel creado!")
         wordsRepository.initList()
@@ -48,6 +53,14 @@ class GameViewModel(val wordsRepository: WordsRepository) : ViewModel() {
                     )
                 }
             }
+        }
+
+        _myTimer = MyTimer(10f,0.5f, 500).timer.filter {
+            Log.i("GameViewModel",it.toString())
+            it - floor(it) == 0f
+        }.catch { error ->
+            Log.i("GameViewModel", "Ha ocurrido un error")
+            emit(0f)
         }
 
 //        //con filter, envía los datos que cumplan la condición que le indicamos (que sean cada segundo)

@@ -22,8 +22,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.guesstheword.databinding.ScoreFragmentBinding
+import com.example.guesstheword.screens.game.GameFragmentDirections
 
 /**
  * Fragment where the final score is shown, after the game is over
@@ -44,6 +46,11 @@ class ScoreFragment : Fragment() {
 
         // Inflate view and obtain an instance of the binding class.
         binding = ScoreFragmentBinding.inflate(inflater,container,false)
+
+        binding.playAgainButton.setOnClickListener{
+            val action = ScoreFragmentDirections.actionScoreFragmentToGameFragment()
+            findNavController().navigate(action)
+        }
         return binding.root
     }
 

@@ -30,6 +30,8 @@ class GameViewModel(val wordsRepository: WordsRepository) : ViewModel() {
     private lateinit var _myTimer : Flow<Float>
     val myTimer get() = _myTimer
 
+    private val _correctWords: MutableList<String> = mutableListOf()
+    private val _wrongWords: MutableList<String> = mutableListOf()
 
     init {
         Log.i("GameViewModel", "GameViewModel creado!")
@@ -85,11 +87,41 @@ class GameViewModel(val wordsRepository: WordsRepository) : ViewModel() {
 
     //Función que toma una nueva palabra e incrementa o decrementa la puntuación.
     fun nextWord(acierto: Boolean) {
+        //val inc = if (acierto) 1 else -1
+        //if (gameUiState.value.wordList.isNotEmpty()) {
+        //    _gameUIState.update { currentState ->
+        //        currentState.copy(
+        //            word = currentState.wordList.get(0),
+        //            score = currentState.score + inc,
+        //            wordList = currentState.wordList.subList(1, currentState.wordList.size)
+        //        )
+        //    }
+        //} else {
+        //    _gameUIState.update { currenState ->
+        //        currenState.copy(
+        //            word = "",
+        //            score = currenState.score + inc,
+        //            wordList = emptyList()
+        //        )
+        //    }
+        //}
+        //if (gameUiState.value.score == 10 && inc == 1)
+        //    _gameUIState.update { currenState ->
+        //        currenState.copy(
+        //            message = "Good score!"
+        //        )
+        //    }
         val inc = if (acierto) 1 else -1
+        val currentWord = gameUiState.value.word
+        if (acierto) {
+            _correctWords.add(currentWord)
+        } else {
+            _wrongWords.add(currentWord)
+        }
         if (gameUiState.value.wordList.isNotEmpty()) {
             _gameUIState.update { currentState ->
                 currentState.copy(
-                    word = currentState.wordList.get(0),
+                    word = currentState.wordList[0],
                     score = currentState.score + inc,
                     wordList = currentState.wordList.subList(1, currentState.wordList.size)
                 )
@@ -117,6 +149,14 @@ class GameViewModel(val wordsRepository: WordsRepository) : ViewModel() {
                 message = null
             )
         }
+    }
+
+    fun getCorrectWords(): MutableList<String> {
+        return _correctWords.toMutableList()
+    }
+
+    fun getWrongWords(): MutableList<String> {
+        return _wrongWords.toMutableList()
     }
 
 //    fun onSkip() {

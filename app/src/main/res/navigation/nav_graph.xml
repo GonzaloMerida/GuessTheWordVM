@@ -19,13 +19,20 @@
         android:name="com.example.guesstheword.screens.score.ScoreFragment"
         android:label="ScoreFragment"
         tools:layout="@layout/score_fragment">
-        <argument
-            android:name="final_score"
-            app:argType="integer"
-            android:defaultValue="0" />
+
         <action
             android:id="@+id/action_scoreFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+        <argument
+            android:name="final_score"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="correctWords"
+            app:argType="MutableList" />
+        <argument
+            android:name="wrongWords"
+            app:argType="MutableList"/>
     </fragment>
     <fragment
         android:id="@+id/gameFragment"

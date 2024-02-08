@@ -101,9 +101,12 @@ class GameFragment : Fragment() {
 
     private fun onEndGame() {
         Snackbar.make(requireView(), getString(R.string.no_word), Snackbar.LENGTH_SHORT).show()
-        val action = GameFragmentDirections.actionGameFragmentToScoreFragment()
-        action.finalScore = gameVM.gameUiState.value.score
-        findNavController().navigate(action)
+        //cómo paso los 3 valores como args?
+        val correctWords = gameVM.getCorrectWords()
+        val wrongWords = gameVM.getWrongWords()
+        //val action = GameFragmentDirections.actionGameFragmentToScoreFragment()
+        //action.finalScore = gameVM.gameUiState.value.score
+        //findNavController().navigate(action)
     }
 
 //    fun onSkip() {

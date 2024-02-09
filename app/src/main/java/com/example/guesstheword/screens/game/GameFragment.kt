@@ -45,7 +45,6 @@ class GameFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        // Inflate view and obtain an instance of the binding class
         binding = GameFragmentBinding.inflate(inflater,container,false)
 
         //initialization.
@@ -101,12 +100,9 @@ class GameFragment : Fragment() {
 
     private fun onEndGame() {
         Snackbar.make(requireView(), getString(R.string.no_word), Snackbar.LENGTH_SHORT).show()
-        //cómo paso los 3 valores como args?
-        val correctWords = gameVM.getCorrectWords()
-        val wrongWords = gameVM.getWrongWords()
-        //val action = GameFragmentDirections.actionGameFragmentToScoreFragment()
-        //action.finalScore = gameVM.gameUiState.value.score
-        //findNavController().navigate(action)
+        val action = GameFragmentDirections.actionGameFragmentToScoreFragment(gameVM.correctWords,gameVM.wrongWords)
+        action.finalScore = gameVM.gameUiState.value.score
+        findNavController().navigate(action)
     }
 
 //    fun onSkip() {

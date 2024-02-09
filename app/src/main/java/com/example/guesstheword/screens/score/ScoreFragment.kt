@@ -38,8 +38,6 @@ class ScoreFragment : Fragment() {
 
     private val scoreVM : ScoreViewModel by viewModels()
 
-    //private val correctWords = args.correctWords.toMutableList()
-    //private val wrongWords = args.wrongWords.toMutableList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,10 +58,15 @@ class ScoreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       // binding.correctWordsList.text = correctWords.joinToString("\n")
-       // binding.wrongWordsList.text = wrongWords.joinToString("\n")
+        //Inicializa el ViewModel
         scoreVM.setFinalScore(args.finalScore)
+        scoreVM.setCorrectWords(args.correctWords)
+        scoreVM.setWrongWords(args.wrongWords)
+
 
         binding.scoreText.text = scoreVM.finalScore.toString()
+        binding.correctWordsList.text = scoreVM.correctWords
+        binding.wrongWordsList.text = scoreVM.wrongWords
+
     }
 }

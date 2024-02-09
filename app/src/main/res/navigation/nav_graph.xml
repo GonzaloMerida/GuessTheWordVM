@@ -28,11 +28,11 @@
             android:defaultValue="0"
             app:argType="integer" />
         <argument
-            android:name="correctWords"
-            app:argType="MutableList" />
+            android:name="correct_words"
+            app:argType="string" />
         <argument
-            android:name="wrongWords"
-            app:argType="MutableList"/>
+            android:name="wrong_words"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"

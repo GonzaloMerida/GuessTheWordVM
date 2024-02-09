@@ -10,4 +10,6 @@
     <string name="end_game">End game</string>
     <string name="word_is">The word is…</string>
     <string name="no_word">No more words.</string>
+    <string name="correct_words">Correct words: </string>
+    <string name="wrong_words">Wrong words: </string>
 </resources>

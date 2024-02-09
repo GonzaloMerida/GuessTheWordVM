@@ -4,5 +4,6 @@ data class GameUiState(
     val score : Int = 0,
     val wordList : List<String> = emptyList(),
     val time : Float = 0f,
-    val message : String? = null
+    val message : String? = null,
+
 )

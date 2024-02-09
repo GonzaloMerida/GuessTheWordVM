@@ -63,7 +63,6 @@ class ScoreFragment : Fragment() {
         scoreVM.setCorrectWords(args.correctWords)
         scoreVM.setWrongWords(args.wrongWords)
 
-
         binding.scoreText.text = scoreVM.finalScore.toString()
         binding.correctWordsList.text = scoreVM.correctWords
         binding.wrongWordsList.text = scoreVM.wrongWords

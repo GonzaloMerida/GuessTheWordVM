@@ -1,10 +1,9 @@
 package com.example.guesstheword.dependencies
 
 import android.content.Context
-import com.example.guesstheword.datamodel.LocalDatabase
+import com.example.guesstheword.datasource.LocalDatabase
 import com.example.guesstheword.repositories.GamesRepository
 import com.example.guesstheword.repositories.WordsRepository
-import java.security.AccessControlContext
 
 class Appcontainer(context : Context) {
 

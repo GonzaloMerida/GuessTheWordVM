@@ -1,14 +1,16 @@
-package com.example.guesstheword.datamodel
+package com.example.guesstheword.datasource
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.guesstheword.datamodel.Game
 import com.example.guesstheword.datamodel.GamesDAO
+import com.example.guesstheword.datamodel.Word
 import com.example.guesstheword.datamodel.WordsDAO
 
 @Database(
-    entities = [Word::class,Game::class],
+    entities = [Word::class, Game::class],
     version = 1,
     exportSchema = false)
 abstract class LocalDatabase : RoomDatabase() {

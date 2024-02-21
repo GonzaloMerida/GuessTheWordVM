@@ -5,7 +5,7 @@ import com.example.guesstheword.datasource.LocalDatabase
 import com.example.guesstheword.repositories.GamesRepository
 import com.example.guesstheword.repositories.WordsRepository
 
-class Appcontainer(context : Context) {
+class AppContainer(context : Context) {
 
     //Repositorio de palabras.
     private val _wordsRepository : WordsRepository by lazy {

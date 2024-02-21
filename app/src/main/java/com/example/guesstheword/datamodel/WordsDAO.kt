@@ -10,24 +10,24 @@ import androidx.room.Update
 @Dao
 interface WordsDAO {
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    fun insertWord(word: Word)
+    suspend fun insertWord(word: Word)
 
     @Delete
-    fun deleteWord(word: Word)
+    suspend fun deleteWord(word: Word)
 
     @Update
-    fun update(word: Word)
+    suspend fun update(word: Word)
 
     @Query("SELECT * FROM words ORDER BY title")
-    fun getAllWords(): List<Word>?
+    suspend fun getAllWords(): List<Word>?
 
     //coge solo una palabra aleatoria de la lista ordenada de manera aleatoria
     @Query("SELECT * FROM words ORDER BY RAND() DESC LIMIT 1")
-    fun getRandomWord(): Word?
+    suspend fun getRandomWord(): Word?
 
     @Query("DELETE FROM words")
-    fun clearWords()
+    suspend fun clearWords()
 
     @Query("DELETE FROM words WHERE title=:name")
-    fun clearOneWord(name : String)
+    suspend fun clearOneWord(name : String)
 }

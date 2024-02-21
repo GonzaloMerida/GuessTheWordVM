@@ -1,45 +1,36 @@
 package com.example.guesstheword.repositories
 
-class WordsRepository() {
+import androidx.room.Query
+import com.example.guesstheword.datamodel.Word
+import com.example.guesstheword.datamodel.WordsDAO
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
-    private var _wordList : MutableList<String> = mutableListOf()
+class WordsRepository (
+    private val wordsDao: WordsDAO,
+    private val ioDispatcher : CoroutineDispatcher = Dispatchers.IO
+) {
 
-    val wordList : MutableList<String>
-        get() = _wordList
-
-    init {
-        initList()
+    suspend fun insertWord(word: Word) = withContext(ioDispatcher) {
+        wordsDao.insertWord(word)
     }
 
-    fun initList() : MutableList<String> {
-        _wordList = mutableListOf(
-            "queen",
-            "hospital",
-            "basketball",
-            "cat",
-            "change",
-            "snail",
-            "soup",
-            "calendar",
-            "sad",
-            "desk",
-            "guitar",
-            "home",
-            "railway",
-            "zebra",
-            "jelly",
-            "car",
-            "crow",
-            "trade",
-            "bag",
-            "roll",
-            "bubble"
-        )
-        return resetList()
+    suspend fun getAllWords() : List<Word>? = withContext(ioDispatcher) {
+        return@withContext wordsDao.getAllWords()
     }
 
-    fun resetList() : MutableList<String> {
-        _wordList.shuffle()
-        return wordList
+    suspend fun deleteWord(word : Word) = withContext(ioDispatcher) {
+        wordsDao.deleteWord(word)
     }
+
+    suspend fun getRandomWord(): Word? = withContext(ioDispatcher) {
+        return@withContext wordsDao.getRandomWord()
+    }
+
+    suspend fun clearWords() = withContext(ioDispatcher) {
+        wordsDao.clearWords()
+    }
+
 }
